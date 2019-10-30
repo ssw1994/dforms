@@ -1,1 +1,11 @@
-{{config|json}}
+<!-- {{config|json}} -->
+<form [formGroup]="dform">
+  <div *ngIf="config && config.formConfig && config.formConfig.controls && config.formConfig.controls.length > 0">
+    <div *ngFor="let control of config.formConfig.controls;let i = index;" >
+      <div *ngIf="control.control == 'input'" [ngClass]="control.style.parent.cssClass" [ngStyle]="control.style.parent.innerStyle">
+        <input [attr.type]="control.type" [attr.placeholder]="control.placeholder" [attr.value]="control.defaultValue" [ngStyle]="control.style.self.innerStyle" formControlName="{{control.controlName}}" [attr.name]="control.controlName" [ngClass]="{'error': dform.get(control.controlName).invalid}"><br/>
+        <span class="error-msg">{{getError(control)}}</span>
+      </div>
+    </div>
+  </div>
+</form>
