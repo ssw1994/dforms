@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12 controls">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<p><label>Control Name</label></p>
+			<input class="form-control" placeholder="Control Name" [(ngModel)]="control.controlName">
+    </div>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<p><label>Control Type</label></p>
+				<select placeholder="Control Type" class="form-control" [(ngModel)]="control.control">
+        <option *ngFor="let type of controlTypes">{{type}}</option>
+      </select>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="control.control == 'input'">
+				<p><label>Input Type</label></p>
+				<select placeholder="Input Type" class="form-control" [(ngModel)]="control.type">
+        <option *ngFor="let type of inputTypes">{{type}}</option>
+      </select>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<!-- <div *ngIf="control.type == 'text' || control.type='passwrd' ||control.type == 'email' || control.type =='number'">
+           <input >
+         </div> -->
+				<p><label>Default Value</label></p>
+				<input [attr.type]="control.type" [(ngModel)]="control.defaultValue" class="form-control">
+      </div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<p><label>Placeholder</label></p>
+					<input placeholder="Placeholder" class="form-control" [(ngModel)]="control.placeholder">
+      </div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p><label>Disabled</label></p>
+						<select placeholder="Is Disabled" class="form-control" [(ngModel)]="control.disabled">
+        <option [value]="true">True</option>
+        <option [value]="false">False</option>
+      </select>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="control.control == 'select'">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12 padding0">
+								<div class="col-md-6 col-sm-6 col-xs-12 padding-l0" >
+									<p><label>Key Property</label></p>
+									<input type="text" [(ngModel)]="control.optionId" class="form-control m-2" placeholder="Key Property">
+								</div>
+									<div class="col-md-6 col-sm-6 col-xs-12 padding-r0">
+										<p><label>Value Property</label></p>
+										<input type="text" [(ngModel)]="control.optionProperty" class="form-control m-2" placeholder="Value Property">
+								</div>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 padding0">
+										<div class="col-md-6 col-sm-6 col-xs-12 padding-l0">
+											<p><label>[{{control.optionId}}]</label></p>
+											<input type="text" [(ngModel)]="tempObj[control.optionId]" class="form-control m-2" placeholder="Key Property">
+								</div>
+											<div class="col-md-6 col-sm-6 col-xs-12 padding-r0">
+												<p><label>[{{control.optionProperty}}]</label></p>
+												<input type="text" [(ngModel)]="tempObj[control.optionProperty]" class="form-control m-2" placeholder="Value Property">
+								</div>
+											</div>
+                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <button class="btn btn-primary" (click)="control.options.push(tempObj);tempObj = {};">Add</button>
+                      </div>
+										</div>
+										<div></div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<p>Preview</p>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<ul class="nav nav-tabs">
+											<li><a href="#">JSON</a></li>
+											<li><a href="#">Table</a></li>
+										</ul>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<pre>
+			{{control|json}}
+      </pre>
+									</div>
+								</div>

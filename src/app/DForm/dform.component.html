@@ -1,11 +1,43 @@
 <!-- {{config|json}} -->
 <form [formGroup]="dform">
-  <div *ngIf="config && config.formConfig && config.formConfig.controls && config.formConfig.controls.length > 0">
-    <div *ngFor="let control of config.formConfig.controls;let i = index;" >
-      <div *ngIf="control.control == 'input'" [ngClass]="control.style.parent.cssClass" [ngStyle]="control.style.parent.innerStyle">
-        <input [attr.type]="control.type" [attr.placeholder]="control.placeholder" [attr.value]="control.defaultValue" [ngStyle]="control.style.self.innerStyle" formControlName="{{control.controlName}}" [attr.name]="control.controlName" [ngClass]="{'error': dform.get(control.controlName).invalid}"><br/>
-        <span class="error-msg">{{getError(control)}}</span>
-      </div>
-    </div>
-  </div>
+	<div *ngIf="config && config.formConfig && config.formConfig.controls && config.formConfig.controls.length > 0">
+		<div *ngFor="let control of config.formConfig.controls;let i = index;">
+			<div *ngIf="control.control == 'input'">
+				<!-- Type : Text, password, number, email -->
+				<div [ngClass]="control.style.parent.cssClass" [ngStyle]="control.style.parent.innerStyle"
+					*ngIf="control.type == 'text' || control.type == 'password' || control.type == 'email' || control.type == 'number'">
+					<input
+            [attr.type]="control.type" [attr.placeholder]="control.placeholder" [ngStyle]="control.style.self.innerStyle" formControlName="{{control.controlName}}" [attr.name]="control.controlName" [ngClass]="{'error': dform.get(control.controlName).invalid}"><br/>
+					<span class="error-msg">{{getError(control)}}</span>
+				</div>
+
+				<!-- Type : Checkbox -->
+				<div [ngClass]="control.style.parent.cssClass" [ngStyle]="control.style.parent.innerStyle"
+					*ngIf="control.type == 'checkbox'">
+					<label [ngStyle]="control.style.self.innerStyle">
+              <input 
+              [attr.type]="control.type" 
+              [formControlName]="control.controlName" 
+              [attr.name]="control.controlName"
+              (change)="updateCheckBoxValue($event,control)"
+              [ngClass]="{'error': dform.get(control.controlName).invalid}">{{control.textTitle}}
+            </label>
+					<span class="error-msg">{{getError(control)}}</span>
+				</div>
+
+				<!-- Type : CheckList-->
+				<div [ngClass]="control.style.parent.cssClass" [ngStyle]="control.style.parent.innerStyle"
+					*ngIf="control.type == 'checklist'"></div>
+			</div>
+
+			<!-- Type : Select Box -->
+			<div *ngIf="control.control == 'select'" [ngClass]="control.style.parent.cssClass"
+				[ngStyle]="control.style.parent.innerStyle">
+				<select [attr.placeholder]="control.placeholder" [ngStyle]="control.style.self.innerStyle" formControlName="{{control.controlName}}" [attr.name]="control.controlName" [ngClass]="{'error': dform.get(control.controlName).invalid}">
+          <option *ngFor="let option of control.options;let i = index;" [value]="option[control.optionId] || option">{{option[control.optionProperty] || option}}</option>
+          </select><br/>
+				<span class="error-msg">{{getError(control)}}</span>
+			</div>
+		</div>
+	</div>
 </form>
