@@ -29,7 +29,7 @@ export class AppComponent {
                 required: true,
                 pattern: null,
                 custom: {
-                  name: (iForm:FormGroup) => {
+                  name: (iForm: FormGroup) => {
                     return null;
                   }
                 }
@@ -71,7 +71,7 @@ export class AppComponent {
                 required: true,
                 pattern: null,
                 custom: {
-                  name: (iForm:FormGroup) => {
+                  name: (iForm: FormGroup) => {
                     return null;
                   }
                 }
@@ -116,7 +116,7 @@ export class AppComponent {
                 required: true,
                 pattern: null,
                 custom: {
-                  name: (iForm:FormGroup) => {
+                  name: (iForm: FormGroup) => {
                     return null;
                   }
                 }
@@ -157,7 +157,7 @@ export class AppComponent {
                 required: true,
                 pattern: null,
                 custom: {
-                  name: (iForm:FormGroup) => {
+                  name: (iForm: FormGroup) => {
                     return null;
                   }
                 }

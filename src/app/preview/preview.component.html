@@ -22,11 +22,11 @@
          </div> -->
 				<p><label>Default Value</label></p>
 				<input [attr.type]="control.type" [(ngModel)]="control.defaultValue" class="form-control">
-      </div>
+    </div>
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<p><label>Placeholder</label></p>
 					<input placeholder="Placeholder" class="form-control" [(ngModel)]="control.placeholder">
-      </div>
+    </div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<p><label>Disabled</label></p>
 						<select placeholder="Is Disabled" class="form-control" [(ngModel)]="control.disabled">
@@ -37,7 +37,7 @@
 					<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="control.control == 'select'">
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12 padding0">
-								<div class="col-md-6 col-sm-6 col-xs-12 padding-l0" >
+								<div class="col-md-6 col-sm-6 col-xs-12 padding-l0">
 									<p><label>Key Property</label></p>
 									<input type="text" [(ngModel)]="control.optionId" class="form-control m-2" placeholder="Key Property">
 								</div>
@@ -56,24 +56,59 @@
 												<input type="text" [(ngModel)]="tempObj[control.optionProperty]" class="form-control m-2" placeholder="Value Property">
 								</div>
 											</div>
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <button class="btn btn-primary" (click)="control.options.push(tempObj);tempObj = {};">Add</button>
-                      </div>
+											<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+												<button class="btn btn-primary" (click)="control.options.push(tempObj);tempObj = {};">Add</button>
+											</div>
 										</div>
 										<div></div>
 									</div>
-									<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="col-md-12 col-sm-12 col-xs-12">
 										<p>Preview</p>
 									</div>
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<ul class="nav nav-tabs">
-											<li><a href="#">JSON</a></li>
-											<li><a href="#">Table</a></li>
+											<li (click)="activeTab = 1" [attr.class]="{'active':activeTab == 1}"><a
+													href="#">JSON</a></li>
+											<li (click)="activeTab = 2" [attr.class]="{'active':activeTab == 2}"><a
+													href="#">Table</a></li>
 										</ul>
 									</div>
-									<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="activeTab == 1">
 										<pre>
-			{{control|json}}
-      </pre>
+			         {{control|json}}
+             </pre>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12 table-responsive" *ngIf="activeTab == 2">
+										<table class="table table-bordered">
+											<thead>
+												<tr align="center">
+													<th rowspan="3">controlName</th>
+													<th rowspan="3">control</th>
+													<th rowspan="3">type</th>
+													<th rowspan="3">placeholder</th>
+													<th rowspan="3">defaultValue</th>
+													<th rowspan="3">disabled</th>
+													<th rowspan="3">options</th>
+													<th rowspan="3">optionId</th>
+													<th rowspan="3">optionProperty</th>
+													<th colspan="3">validators</th>
+													<th colspan="4">style</th>
+												</tr>
+												<tr>
+													<th rowspan="3">required</th>
+													<th rowspan="3">pattern</th>
+													<th rowspan="3">validator</th>
+													<th colspan="2">parent</th>
+													<th colspan="2">self</th>
+												</tr>
+												<tr>
+													<th>innerStyle</th>
+													<th>cssClass</th>
+													<th>innerStyle</th>
+													<th>cssClass</th>
+												</tr>
+											</thead>
+										</table>
 									</div>
 								</div>
+							</div>

@@ -82,6 +82,7 @@ export class Control implements IControl {
 export class PreviewComponent implements OnInit {
   controlTypes: Array<string> = ["input", "select"];
   inputTypes:Array<string> = ['text','number','email','password','checkbox','radio'];
+  activeTab:number = 1;
   control: Control = new Control();
   tempObj:any = {};
   constructor() {
